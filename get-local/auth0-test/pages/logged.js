@@ -1,4 +1,5 @@
-const Logged = () => {
+const Logged = props => {
+console.log("props", props)
   return (
     <div>
       Logged in successfully
