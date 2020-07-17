@@ -14,7 +14,7 @@ const Logged = (props) => {
 
 	const getInfo = async () => {
 		// const manageClient = auth0.Management({
-		// 	domain: "dev-get-local.auth0.com",
+		// 	domain: "dev-get-local.auth0.com",resprespresp
 		// 	token: props.history.
 		// });
 		// manageClient.getUser({}, (err, res) => {
@@ -22,6 +22,7 @@ const Logged = (props) => {
 		// 	else console.log("getInfo -> err", err);
 		// });
 		if (!resp) {
+			console.log("inside");
 			auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
 				if (err) {
 					return console.log(err);
