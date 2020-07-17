@@ -2,6 +2,7 @@ import auth0 from "auth0-js";
 import { useState } from "react";
 const Logged = (props) => {
 	const [userDet, setUserDet] = useState();
+	const [resp, setResp] = useState();
 
 	const auth0Client = new auth0.WebAuth({
 		domain: "dev-get-local.auth0.com",
@@ -20,16 +21,18 @@ const Logged = (props) => {
 		// 	if (err) console.log("getInfo -> res", res);
 		// 	else console.log("getInfo -> err", err);
 		// });
-		auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
-			if (err) {
-				return console.log(err);
-			}
-
-			auth0Client.client.userInfo(res.accessToken, (err, user) => {
-				console.log("Logged -> user", user);
-				setUserDet(user);
-				// Now you have the user's information
+		if (!resp) {
+			auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
+				if (err) {
+					return console.log(err);
+				}
+				setResp(res);
 			});
+		}
+		auth0Client.client.userInfo(resp.accessToken, (err, user) => {
+			console.log("Logged -> user", user);
+			setUserDet(user);
+			// Now you have the user's information
 		});
 	};
 
