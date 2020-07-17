@@ -11,7 +11,7 @@ const Login = () => {
 	const auth0Client = new auth0.WebAuth({
 		domain: "dev-get-local.auth0.com",
 		clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
-		redirectUri: "https://auth0js-test.vercel.app/",
+		redirectUri: "https://auth0js-test.vercel.app/logged/",
 		scope: "openid profile email read:current_user",
 		responseType: "code id_token",
 	});
