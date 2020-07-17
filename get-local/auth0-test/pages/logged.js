@@ -21,6 +21,7 @@ const Logged = (props) => {
 		// 	if (err) console.log("getInfo -> res", res);
 		// 	else console.log("getInfo -> err", err);
 		// });
+		let resp1;
 		if (!resp) {
 			console.log("inside");
 			auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
@@ -28,14 +29,18 @@ const Logged = (props) => {
 					return console.log(err);
 				}
 				setResp(res);
+				resp1 = res;
 			});
 		}
 		console.log("Logged -> resp", resp);
-		auth0Client.client.userInfo(resp.accessToken, (err, user) => {
-			console.log("Logged -> user", user);
-			setUserDet(user);
-			// Now you have the user's information
-		});
+		auth0Client.client.userInfo(
+			resp ? resp.accessToken : resp1.accessToken,
+			(err, user) => {
+				console.log("Logged -> user", user);
+				setUserDet(user);
+				// Now you have the user's information
+			}
+		);
 	};
 
 	return (
