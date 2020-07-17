@@ -28,7 +28,7 @@ const Logged = (props) => {
 		// 	else console.log("getInfo -> err", err);
 		// });
 		auth0Client.client.userInfo(resp.accessToken, (err, user) => {
-			console.log("Logged -> user", user);
+			console.log("Logged :-> user", user);
 			setUserDet(user);
 			// Now you have the user's information
 		});
