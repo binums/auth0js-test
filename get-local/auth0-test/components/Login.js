@@ -76,16 +76,6 @@ const Login = () => {
 		}
 	};
 
-	const getInfo = async () => {
-		const manageClient = auth0.Management({
-			domain: "dev-get-local.auth0.com",
-		});
-		manageClient.getUser({}, (err, res) => {
-			if (err) console.log("getInfo -> res", res);
-			else console.log("getInfo -> err", err);
-		});
-	};
-
 	const resetPassword = () => {
 		auth0Client.changePassword(
 			{
@@ -137,7 +127,6 @@ const Login = () => {
 				</>
 			)}
 			<button onClick={() => handleLogout()}>logout</button>
-			<button onClick={getInfo}>Get user info</button>
 		</div>
 	);
 };
