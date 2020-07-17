@@ -66,15 +66,6 @@ const Login = () => {
 		}
 	};
 
-	const handleLogout = async () => {
-		try {
-			auth0Client.logout({
-				returnTo: "http://localhost:3000",
-			});
-		} catch (err) {
-			console.log("handleLogout -> err", err);
-		}
-	};
 
 	const resetPassword = () => {
 		auth0Client.changePassword(
@@ -126,7 +117,6 @@ const Login = () => {
 					<a onClick={() => setStep(1)}>signup</a>
 				</>
 			)}
-			<button onClick={() => handleLogout()}>logout</button>
 		</div>
 	);
 };

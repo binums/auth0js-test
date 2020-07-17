@@ -13,14 +13,6 @@ const Logged = (props) => {
 	});
 
 	const getInfo = async () => {
-		// const manageClient = auth0.Management({
-		// 	domain: "dev-get-local.auth0.com",resprespresp
-		// 	token: props.history.
-		// });
-		// manageClient.getUser({}, (err, res) => {
-		// 	if (err) console.log("getInfo -> res", res);
-		// 	else console.log("getInfo -> err", err);
-		// });
 		let resp1;
 		if (!resp) {
 			console.log("inside");
@@ -43,10 +35,22 @@ const Logged = (props) => {
 		);
 	};
 
+	const handleLogout = async () => {
+		try {
+			auth0Client.logout({
+				returnTo: "http://auth0js-test.vercel.app/",
+			});
+		} catch (err) {
+			console.log("handleLogout -> err", err);
+		}
+	};
+
 	return (
 		<div>
 			<h1>Logged in successfully</h1>
+			<button onClick={() => handleLogout()}>logout</button>
 			<button onClick={getInfo}>Get user info</button>
+
 			{userDet && <div>{JSON.stringify(userDet)}</div>}
 		</div>
 	);
