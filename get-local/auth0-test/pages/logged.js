@@ -39,6 +39,7 @@ const Logged = (props) => {
 		try {
 			auth0Client.logout({
 				returnTo: "http://auth0js-test.vercel.app/",
+				clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
 			});
 		} catch (err) {
 			console.log("handleLogout -> err", err);
