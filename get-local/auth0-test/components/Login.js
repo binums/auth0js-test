@@ -13,7 +13,7 @@ const Login = () => {
 		clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
 		redirectUri: "https://auth0js-test.vercel.app/logged/",
 		scope: "openid profile email read:current_user",
-		responseType: "code id_token",
+		responseType: "code token id_token",
 	});
 
 	const withSocial = async (social) => {

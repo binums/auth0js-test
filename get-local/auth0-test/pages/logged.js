@@ -1,3 +1,4 @@
+import auth0 from "auth0-js";
 const Logged = (props) => {
 	console.log("props", props);
 
