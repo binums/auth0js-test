@@ -1,6 +1,7 @@
 import auth0 from "auth0-js";
+import { useState } from "react";
 const Logged = (props) => {
-	console.log("props", props);
+	const [userDet, setUserDet] = useState();
 
 	const auth0Client = new auth0.WebAuth({
 		domain: "dev-get-local.auth0.com",
@@ -26,6 +27,7 @@ const Logged = (props) => {
 
 			auth0Client.client.userInfo(res.accessToken, (err, user) => {
 				console.log("Logged -> user", user);
+				setUserDet(user);
 				// Now you have the user's information
 			});
 		});
@@ -35,6 +37,7 @@ const Logged = (props) => {
 		<div>
 			<h1>Logged in successfully</h1>
 			<button onClick={getInfo}>Get user info</button>
+			{Object.keys(userDet).length && <div>{JSON.stringify(userDet)}</div>}
 		</div>
 	);
 };
