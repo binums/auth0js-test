@@ -10,6 +10,7 @@ const Logged = (props) => {
 		redirectUri: "https://auth0js-test.vercel.app/logged/",
 		scope: "openid profile email read:current_user",
 		responseType: "code id_token",
+		returnTo: "http://auth0js-test.vercel.app/",
 	});
 
 	const getInfo = async () => {
@@ -37,10 +38,7 @@ const Logged = (props) => {
 
 	const handleLogout = async () => {
 		try {
-			auth0Client.logout({
-				returnTo: "http://auth0js-test.vercel.app/",
-				clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
-			});
+			auth0Client.logout({});
 		} catch (err) {
 			console.log("handleLogout -> err", err);
 		}
