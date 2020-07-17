@@ -1,5 +1,5 @@
 import auth0 from "auth0-js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const Logged = (props) => {
 	const [userDet, setUserDet] = useState();
 	const [resp, setResp] = useState();
@@ -11,12 +11,14 @@ const Logged = (props) => {
 		scope: "openid profile email read:current_user",
 		responseType: "code id_token",
 	});
-	auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
-		if (err) {
-			return console.log(err);
-		}
-		setResp({ ...res });
-	});
+	useEffect(() => {
+		auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
+			if (err) {
+				return console.log(err);
+			}
+			setResp({ ...res });
+		});
+	}, [auth0Client]);
 
 	const getInfo = async () => {
 		// const manageClient = auth0.Management({
