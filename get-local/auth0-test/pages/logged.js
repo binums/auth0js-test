@@ -25,13 +25,13 @@ const Logged = (props) => {
 				resp1 = res;
 			});
 		}
+		console.log("getInfo -> resp1", resp1);
 		console.log("Logged -> resp", resp);
 		auth0Client.client.userInfo(
 			resp ? resp.accessToken : resp1.accessToken,
 			(err, user) => {
 				console.log("Logged -> user", user);
 				setUserDet(user);
-				// Now you have the user's information
 			}
 		);
 	};
@@ -49,7 +49,6 @@ const Logged = (props) => {
 			<h1>Logged in successfully</h1>
 			<button onClick={() => handleLogout()}>logout</button>
 			<button onClick={getInfo}>Get user info</button>
-
 			{userDet && <div>{JSON.stringify(userDet)}</div>}
 		</div>
 	);
