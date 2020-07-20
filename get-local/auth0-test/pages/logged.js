@@ -17,14 +17,17 @@ const Logged = (props) => {
 		let resp1;
 		if (!resp) {
 			console.log("inside");
-			auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
-				if (err) {
-					return console.log(err);
+			await auth0Client.parseHash(
+				{ hash: window.location.hash },
+				(err, res) => {
+					if (err) {
+						return console.log(err);
+					}
+					setResp(res);
+					resp1 = res;
+					console.log("getInfo -> res", res);
 				}
-				setResp(res);
-				resp1 = res;
-				console.log("getInfo -> res", res);
-			});
+			);
 		}
 		console.log("getInfo -> resp1", resp1);
 		console.log("Logged -> resp", resp);
