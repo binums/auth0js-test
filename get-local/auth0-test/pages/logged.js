@@ -23,12 +23,13 @@ const Logged = (props) => {
 				}
 				setResp(res);
 				resp1 = res;
+				console.log("getInfo -> res", res);
 			});
 		}
 		console.log("getInfo -> resp1", resp1);
 		console.log("Logged -> resp", resp);
 		auth0Client.client.userInfo(
-			resp ? resp.accessToken : resp1.accessToken,
+			Object.keys(resp).length ? resp.accessToken : resp1.accessToken,
 			(err, user) => {
 				console.log("Logged -> user", user);
 				setUserDet(user);
