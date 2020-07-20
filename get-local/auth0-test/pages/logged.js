@@ -1,5 +1,8 @@
 import auth0 from "auth0-js";
 import { useState } from "react";
+import { handleLogout, getInfo } from "../auth";
+
+
 const Logged = (props) => {
 	const [userDet, setUserDet] = useState();
 	const [resp, setResp] = useState();
@@ -13,46 +16,46 @@ const Logged = (props) => {
 		returnTo: "http://auth0js-test.vercel.app/",
 	});
 
-	const getInfo = async () => {
-		let resp1;
-		if (!resp) {
-			console.log("inside");
-			await auth0Client.parseHash(
-				{ hash: window.location.hash },
-				(err, res) => {
-					if (err) {
-						return console.log(err);
-					}
-					setResp(res);
-					resp1 = res;
-					console.log("getInfo -> res", res);
-				}
-			);
-		}
-		console.log("getInfo -> resp1", resp1);
-		console.log("Logged -> resp", resp);
-		auth0Client.client.userInfo(
-			Object.keys(resp).length ? resp.accessToken : resp1.accessToken,
-			(err, user) => {
-				console.log("Logged -> user", user);
-				setUserDet(user);
-			}
-		);
-	};
+	// const getInfo = async () => {
+	// 	let resp1;
+	// 	if (!resp) {
+	// 		console.log("inside");
+	// 		await auth0Client.parseHash(
+	// 			{ hash: window.location.hash },
+	// 			(err, res) => {
+	// 				if (err) {
+	// 					return console.log(err);
+	// 				}
+	// 				setResp(res);
+	// 				resp1 = res;
+	// 				console.log("getInfo -> res", res);
+	// 			}
+	// 		);
+	// 	}
+	// 	console.log("getInfo -> resp1", resp1);
+	// 	console.log("Logged -> resp", resp);
+	// 	auth0Client.client.userInfo(
+	// 		Object.keys(resp).length ? resp.accessToken : resp1.accessToken,
+	// 		(err, user) => {
+	// 			console.log("Logged -> user", user);
+	// 			setUserDet(user);
+	// 		}
+	// 	);
+	// };
 
-	const handleLogout = async () => {
-		try {
-			auth0Client.logout({});
-		} catch (err) {
-			console.log("handleLogout -> err", err);
-		}
-	};
+	// const handleLogout = async () => {
+	// 	try {
+	// 		auth0Client.logout({});
+	// 	} catch (err) {
+	// 		console.log("handleLogout -> err", err);
+	// 	}
+	// };
 
 	return (
 		<div>
 			<h1>Logged in successfully</h1>
-			<button onClick={() => handleLogout()}>logout</button>
-			<button onClick={getInfo}>Get user info</button>
+			<button onClick={() => handleLogout(auth0Client)}>logout</button>
+			<button onClick={() => getInfo(auth0Client, resp, setResp, setUserDet)}>Get user info</button>
 			{userDet && <div>{JSON.stringify(userDet)}</div>}
 		</div>
 	);
