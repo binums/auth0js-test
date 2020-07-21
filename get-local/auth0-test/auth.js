@@ -1,3 +1,5 @@
+import auth0 from "auth0-js";
+
 const auth0Client = new auth0.WebAuth({
 	domain: "dev-get-local.auth0.com",
 	clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
