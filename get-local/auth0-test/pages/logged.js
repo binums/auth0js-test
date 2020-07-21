@@ -10,7 +10,10 @@ const Logged = (props) => {
 		<div>
 			<h1>Logged in successfully</h1>
 			<button onClick={() => handleLogout()}>logout</button>
-			<button onClick={() => getInfo(resp, setResp, setUserDet)}>
+			<button
+				onClick={() =>
+					getInfo(resp, setResp, setUserDet, window.location.hash)
+				}>
 				Get user info
 			</button>
 			{userDet && <div>{JSON.stringify(userDet)}</div>}

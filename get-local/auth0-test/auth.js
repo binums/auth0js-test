@@ -5,7 +5,7 @@ const auth0Client = new auth0.WebAuth({
 	clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
 	redirectUri: "https://auth0js-test.vercel.app/logged/",
 	scope: "openid profile email read:current_user",
-	responseType: "code id_token",
+	responseType: "code token id_token",
 	returnTo: "http://auth0js-test.vercel.app/",
 });
 
@@ -100,10 +100,10 @@ const resetPassword = (email) => {
  * @param setUserDet {function} - setter for user details
  */
 
-const getInfo = async (resp, setResp, setUserDet) => {
+const getInfo = async (resp, setResp, setUserDet, hash) => {
 	let resp1;
 	if (!resp) {
-		await auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
+		await auth0Client.parseHash({ hash }, (err, res) => {
 			if (err) {
 				return console.log(err);
 			}
