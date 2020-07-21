@@ -1,10 +1,29 @@
-const withSocial = async (auth0Client, social) => {
+const auth0Client = new auth0.WebAuth({
+	domain: "dev-get-local.auth0.com",
+	clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
+	redirectUri: "https://auth0js-test.vercel.app/logged/",
+	scope: "openid profile email read:current_user",
+	responseType: "code id_token",
+	returnTo: "http://auth0js-test.vercel.app/",
+});
+
+/**
+ * @param auth0Client {Object} - client object initialized with auth0
+ * @param social {string} - name of the connection as mentioned in auth0 dashboard
+ */
+const withSocial = async (social) => {
 	auth0Client.authorize({
 		connection: social,
 	});
 };
 
-const handleEmailSignup = async (auth0Client, email, passwd) => {
+/**
+ * @param auth0Client {Object} - client object initialized with auth0
+ * @param email {string} - email address
+ * @param passwd {string} - password
+ */
+
+const handleEmailSignup = async (email, passwd) => {
 	try {
 		await auth0Client.signup(
 			{
@@ -31,7 +50,13 @@ const handleEmailSignup = async (auth0Client, email, passwd) => {
 	}
 };
 
-const handleEmailLogin = async (auth0Client, email, passwd) => {
+/**
+ * @param auth0Client {Object} - client object initialized with auth0
+ * @param email {string} - email address
+ * @param passwd {string} - password
+ */
+
+const handleEmailLogin = async (email, passwd) => {
 	try {
 		auth0Client.login(
 			{
@@ -48,7 +73,12 @@ const handleEmailLogin = async (auth0Client, email, passwd) => {
 	}
 };
 
-const resetPassword = (auth0Client, email) => {
+/**
+ * @param auth0Client {Object} - client object initialized with auth0
+ * @param email {string} - email address
+ */
+
+const resetPassword = (email) => {
 	auth0Client.changePassword(
 		{
 			connection: "Username-Password-Authentication",
@@ -61,7 +91,14 @@ const resetPassword = (auth0Client, email) => {
 	);
 };
 
-const getInfo = async (auth0Client, resp, setResp, setUserDet) => {
+/**
+ * @param auth0Client {Object} - client object initialized with auth0
+ * @param resp {Object} - response object from parseHash
+ * @param setResp {function} - setter for resp
+ * @param setUserDet {function} - setter for user details
+ */
+
+const getInfo = async (resp, setResp, setUserDet) => {
 	let resp1;
 	if (!resp) {
 		await auth0Client.parseHash({ hash: window.location.hash }, (err, res) => {
@@ -83,7 +120,11 @@ const getInfo = async (auth0Client, resp, setResp, setUserDet) => {
 	);
 };
 
-const handleLogout = async (auth0Client) => {
+/**
+ * @param auth0Client {Object} - client object initialized with auth0
+ */
+
+const handleLogout = async () => {
 	try {
 		auth0Client.logout({});
 	} catch (err) {

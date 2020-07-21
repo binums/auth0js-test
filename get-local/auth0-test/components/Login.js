@@ -13,91 +13,20 @@ const Login = () => {
 	const [passwd, setPasswd] = useState();
 	const [err, setErr] = useState();
 	const [step, setStep] = useState(1);
-
-	const auth0Client = new auth0.WebAuth({
-		domain: "dev-get-local.auth0.com",
-		clientID: "DascarCyX9s2nqWTjUhTwp7oiJke1kpK",
-		redirectUri: "https://auth0js-test.vercel.app/logged/",
-		scope: "openid profile email read:current_user",
-		responseType: "code token id_token",
-	});
-
-	// const withSocial = async (social) => {
-	// 	auth0Client.authorize({
-	// 		connection: social,
-	// 	});
-	// };
-
-	// const handleEmailSignup = async () => {
-	// 	try {
-	// 		await auth0Client.signup(
-	// 			{
-	// 				connection: "Username-Password-Authentication",
-	// 				email,
-	// 				password: passwd,
-	// 			},
-	// 			(err, res) => {
-	// 				if (err) throw err;
-	// 				console.log("handleEmailSignup -> res", res);
-	// 			}
-	// 		);
-	// 		await auth0Client.login(
-	// 			{
-	// 				email,
-	// 				password: passwd,
-	// 			},
-	// 			(res) => {
-	// 				console.log("handleEmailLogin -> res", res);
-	// 			}
-	// 		);
-	// 	} catch (err) {
-	// 		console.log("handleEmailSignup -> err", err);
-	// 	}
-	// };
-
-	// const handleEmailLogin = async () => {
-	// 	try {
-	// 		auth0Client.login(
-	// 			{
-	// 				email,
-	// 				password: passwd,
-	// 			},
-	// 			(err, res) => {
-	// 				if (err) throw err;
-	// 				console.log("handleEmailLogin -> res", res);
-	// 			}
-	// 		);
-	// 	} catch (err) {
-	// 		console.log("handleEmailLogin -> err", err);
-	// 	}
-	// };
-
-	// const resetPassword = () => {
-	// 	auth0Client.changePassword(
-	// 		{
-	// 			connection: "Username-Password-Authentication",
-	// 			email: email,
-	// 		},
-	// 		(err, res) => {
-	// 			if (err) console.log("getInfo -> res", res);
-	// 			else console.log("getInfo -> err", err);
-	// 		}
-	// 	);
-	// };
-
+	
 	return (
 		<div>
 			Login Component Login page <br />
 			<br />
-			<button onClick={() => withSocial(auth0Client, "google-oauth2")}>
+			<button onClick={() => withSocial( "google-oauth2")}>
 				Login with google
 			</button>
 			<br />
-			<button onClick={() => withSocial(auth0Client, "facebook")}>
+			<button onClick={() => withSocial( "facebook")}>
 				Login with facebook
 			</button>
 			<br />
-			<button onClick={() => withSocial(auth0Client, "windowslive")}>
+			<button onClick={() => withSocial( "windowslive")}>
 				Login with microsoft
 			</button>
 			<br />
@@ -110,7 +39,7 @@ const Login = () => {
 			</form>
 			{step === 1 ? (
 				<>
-					<button onClick={() => handleEmailSignup(auth0Client, email, passwd)}>
+					<button onClick={() => handleEmailSignup( email, passwd)}>
 						SignUp
 					</button>
 					<br />
@@ -118,10 +47,10 @@ const Login = () => {
 				</>
 			) : (
 				<>
-					<button onClick={() => handleEmailLogin(auth0Client, email, passwd)}>
+					<button onClick={() => handleEmailLogin( email, passwd)}>
 						LogIn
 					</button>
-					<button onClick={() => resetPassword(auth0Client, email)}>
+					<button onClick={() => resetPassword( email)}>
 						Forgot password
 					</button>
 					<br />
